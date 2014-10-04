@@ -1,0 +1,38 @@
+BlocBreaker
+
+An arkanoid clone
+
+*********************************************
+*    [____][____][____][____][____][____]   *
+*    [____][____][____][____][____][____]   *
+*    [____][____][____][____][____][____]   *
+*    [____][____][____][____][____][____]   *
+*    [____][____][____][____][____][____]   *
+*    [____][____][____][____][____][____]   *
+*                                           *
+*                                           *
+*            o                              *
+*                _____                      *
+*               [_____]                     *
+*                                           *
+*********************************************
+
+Ball hits bricks, bricks break. Level ends when 
+all bricks are broken. If the ball falls below 
+the bat, the ball is lost. Player starts out 
+with three balls. When all balls are lost, the
+game is over. Levels are progressively more
+difficult. Power-ups and handicaps are randomly
+placed when the blocks break.
+
+** Initial Thoughts **
+- Need a way to store and read level layouts
+- Need graphics for ball, bat, bricks, backgrounds,
+	and power-ups
+- Use keyboard for desktop version, touch or 
+	accelerometer for mobile?
+- Need sounds for the ball bouncing off the paddle,
+	and for the bricks breaking
+- Will need collision detection to check 
+	and see if the ball hits a wall, brick, 
+	or the bat.
