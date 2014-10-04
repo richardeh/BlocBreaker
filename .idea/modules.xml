@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/BlocBreaker/BlocBreaker.iml" filepath="$PROJECT_DIR$/BlocBreaker/BlocBreaker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BlocBreaker-android/BlocBreaker-android.iml" filepath="$PROJECT_DIR$/BlocBreaker-android/BlocBreaker-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BlocBreaker-desktop/BlocBreaker-desktop.iml" filepath="$PROJECT_DIR$/BlocBreaker-desktop/BlocBreaker-desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BlocBreaker-html/BlocBreaker-html.iml" filepath="$PROJECT_DIR$/BlocBreaker-html/BlocBreaker-html.iml" />
+    </modules>
+  </component>
+</project>
+
