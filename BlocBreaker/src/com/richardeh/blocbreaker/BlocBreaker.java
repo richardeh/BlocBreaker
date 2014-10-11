@@ -1,22 +1,23 @@
 package com.richardeh.blocbreaker;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.richardeh.blocbreaker.Screens.MainMenuScreen;
 
-public class BlocBreaker  extends Game{
+public class BlocBreaker  extends Game implements ApplicationListener {
 	
+	public static Game game;
 	@Override
-	public void create() {		
-		setScreen(new MainMenuScreen());
+	public void create() {
+		game = this;
+		game.setScreen(new MainMenuScreen());
 	}
 
 	@Override
 	public void dispose() {
 	}
 
-	@Override
-	public void render() {	
-	}
+	
 
 	@Override
 	public void resize(int width, int height) {
@@ -28,5 +29,9 @@ public class BlocBreaker  extends Game{
 
 	@Override
 	public void resume() {
+	}
+	
+	public static Game getGame(){
+		return game;
 	}
 }

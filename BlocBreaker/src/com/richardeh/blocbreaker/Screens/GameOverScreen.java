@@ -8,36 +8,33 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.richardeh.blocbreaker.BlocBreaker;
 import com.richardeh.blocbreaker.framework.GenericScreen;
 
-/**
- * Created by Richard Harrington on 10/4/2014.
- */
-public class MainMenuScreen extends GenericScreen {
+public class GameOverScreen extends GenericScreen{
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
-	public Game game;
+	private Game game;
 	
-	public MainMenuScreen(){
-
+	public GameOverScreen(){
 		float h = Gdx.graphics.getHeight();
 		float w = Gdx.graphics.getWidth();
 		
 		camera = new OrthographicCamera(1, h/w);
 		batch = new SpriteBatch();
 		game = BlocBreaker.getGame();
+
 		Gdx.input.setInputProcessor(this);
 	}
-
-	@Override
-	public void render(float delta) {
-		// TODO: fill in what gets drawn on the main menu screen
-		Gdx.gl.glClearColor(1, 0, 1, 1);
+	
+	public void render(float delta){
+		Gdx.gl.glClearColor(0, 1, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		batch.setProjectionMatrix(camera.combined);
+		
 	}
 	
-	@Override
 	public boolean keyUp(int keycode){
-		Gdx.app.debug("MainMenuScreen", "keycode "+keycode);
-		game.setScreen(new GameScreen());
+		game.setScreen(new MainMenuScreen());
 		return false;
 	}
+
 }
