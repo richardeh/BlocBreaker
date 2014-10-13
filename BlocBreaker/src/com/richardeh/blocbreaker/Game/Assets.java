@@ -12,13 +12,18 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class Assets {
 
-    public Sprite ball;
-    public Sprite paddle;
-    public Sprite redBlock, greenBlock, blueBlock, greyBlock, purpleBlock, yellowBlock;
+    public static Sprite ball;
+    public static Sprite paddle;
+    public static Sprite redBlock;
+	public static Sprite greenBlock;
+	public static Sprite blueBlock;
+	public static Sprite greyBlock;
+	public static Sprite purpleBlock;
+	public static Sprite yellowBlock;
     public Sound blockBreak;
     public Sound bounce;
     
-    public void load(){
+    public static void load(){
     	redBlock = new Sprite(new TextureRegion(new Texture(Gdx.files.internal("element_red_rectangle.png"))));
     	greenBlock = new Sprite(new TextureRegion(new Texture(Gdx.files.internal("element_green_rectangle.png"))));
     	blueBlock =  new Sprite(new TextureRegion(new Texture(Gdx.files.internal("element_blue_rectangle.png"))));
