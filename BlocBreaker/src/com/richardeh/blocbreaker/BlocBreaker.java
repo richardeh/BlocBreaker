@@ -1,8 +1,7 @@
 package com.richardeh.blocbreaker;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Game;
-import com.richardeh.blocbreaker.Game.Assets;
+import com.richardeh.blocbreaker.Game.Game;
 import com.richardeh.blocbreaker.Screens.MainMenuScreen;
 
 public class BlocBreaker  extends Game implements ApplicationListener {
