@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.XmlReader;
+import com.richardeh.blocbreaker.framework.DynamicGameObject;
 
 /**
  * Created by Richard Harrington on 10/4/2014.
@@ -16,6 +17,7 @@ public class Game extends com.badlogic.gdx.Game{
     private float w,h;
     private ArrayList<Block> blocks;
     private static ArrayList<Ball> balls;
+    private ArrayList<DynamicGameObject> objects;
 
     public Game(){
         Ball ball = new Ball(0,0,32,32,5,5,0,0);
@@ -25,6 +27,9 @@ public class Game extends com.badlogic.gdx.Game{
         balls.add(ball2);
         
         paddle = new Paddle(0,0,104,24,0,0);
+        objects = new ArrayList<DynamicGameObject>();
+        objects.add(paddle);
+        
         currentLevel = 1;
         blocks= new ArrayList<Block>();
         		//loadLevel(currentLevel);
@@ -106,6 +111,22 @@ public class Game extends com.badlogic.gdx.Game{
     }
     
     private void bounceTest(){
-    	
+    	for(Ball ball: balls){
+    		for(DynamicGameObject o:objects){
+    			if(ball.intersects(o)){
+    				if(!ball.isFlaming){
+    					ball.velocity.y = -ball.velocity.y;
+    				}
+    				
+    				if(o.getClass()==Block.class){
+    						o.destroy();
+    				}
+    				
+    				if(o.getClass()==Paddle.class){
+    				}
+    			}
+    		}
+    	}
     }
+    
 }
