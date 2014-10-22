@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.XmlReader;
 import com.richardeh.blocbreaker.framework.DynamicGameObject;
@@ -20,8 +22,8 @@ public class Game extends com.badlogic.gdx.Game{
     private ArrayList<DynamicGameObject> objects;
 
     public Game(){
-        Ball ball = new Ball(0,0,32,32,5,5,0,0);
-        Ball ball2 = new Ball(0,0,32,32,10,10,0,0);
+        Ball ball = new Ball(0,32,32,32,5,5,0,0);
+        Ball ball2 = new Ball(0,32,32,32,10,10,0,0);
         balls = new ArrayList<Ball>();
         balls.add(ball);
         balls.add(ball2);
@@ -53,7 +55,9 @@ public class Game extends com.badlogic.gdx.Game{
     public void moveBall(Ball b,Vector2 v){
 
     		b.position.add(v);
-
+    		b.bounds.x = b.position.x;
+    		b.bounds.y = b.position.y;
+    		
     }
 
     public ArrayList<Vector2> getBallPosition(){
@@ -72,6 +76,7 @@ public class Game extends com.badlogic.gdx.Game{
     	if(paddle.position.x+paddle.bounds.width+x>=w||paddle.position.x+x<=0) return;
     	
     	paddle.position.x+=x;
+    	paddle.bounds.x = paddle.position.x;
     }
 
     @Override
@@ -111,19 +116,15 @@ public class Game extends com.badlogic.gdx.Game{
     }
     
     private void bounceTest(){
+
+		Rectangle overlap = new Rectangle();
     	for(Ball ball: balls){
     		for(DynamicGameObject o:objects){
-    			if(ball.intersects(o)){
-    				if(!ball.isFlaming){
-    					ball.velocity.y = -ball.velocity.y;
-    				}
-    				
-    				if(o.getClass()==Block.class){
-    						o.destroy();
-    				}
-    				
-    				if(o.getClass()==Paddle.class){
-    				}
+    			Intersector.intersectRectangles(ball.bounds, o.bounds, overlap);
+    			if(overlap!=null && overlap.area()>0){
+    				ball.velocity.y = -ball.velocity.y;
+    				ball.position.y = o.position.y+o.bounds.height;
+    			} else{
     			}
     		}
     	}

@@ -24,7 +24,7 @@ public class DynamicGameObject extends GameObject {
     
     public boolean intersects(DynamicGameObject other){
     	// Right edge
-    	if(this.dimensions.x+this.bounds.width>other.dimensions.x && this.dimensions.x<other.dimensions.x+other.bounds.width){
+    	if(this.dimensions.x+this.bounds.width>other.dimensions.x && this.dimensions.x+this.bounds.width<other.dimensions.x+other.bounds.width){
 
     		if(this.dimensions.y+this.bounds.height>other.dimensions.y && this.dimensions.y+this.bounds.height<other.dimensions.y+other.bounds.height){
         		// Top edge

@@ -58,8 +58,8 @@ public class GameScreen extends GenericScreen {
 	}
 	
 	public boolean keyDown(int keycode){
-		if(keycode == Keys.RIGHT) game.movePaddle(5);
-		if(keycode == Keys.LEFT) game.movePaddle(-5);
+		if(keycode == Keys.RIGHT) game.movePaddle(30);
+		if(keycode == Keys.LEFT) game.movePaddle(-30);
 		return false;
 	}
 }
