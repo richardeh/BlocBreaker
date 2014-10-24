@@ -38,16 +38,28 @@ public class GameScreen extends GenericScreen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		ArrayList<Vector2> balls = game.getBallPosition();
+		ArrayList<Vector2> balls = game.getElementPositions("balls");
+		ArrayList<Vector2> blocks = game.getElementPositions("blocks");
+		ArrayList<Vector2> paddle = game.getElementPositions("paddle");
+		
 		game.update();
-		paddleSprite.setPosition(game.getPaddlePosition().x,game.getPaddlePosition().y);
+		
 		batch.begin();
 
 		for(Vector2 v:balls){
 	        ballSprite.setPosition(v.x,v.y);
 	        ballSprite.draw(batch);	
 		}
-        paddleSprite.draw(batch);
+		
+		for(Vector2 v:blocks){
+			
+		}
+		
+		for(Vector2 v:paddle){
+			paddleSprite.setPosition(v.x, v.y);
+			paddleSprite.draw(batch);
+		}
+		
 		batch.end();
 		
 	}
@@ -58,6 +70,7 @@ public class GameScreen extends GenericScreen {
 	}
 	
 	public boolean keyDown(int keycode){
+		// need to figure out how to make this continue while the key is down
 		if(keycode == Keys.RIGHT) game.movePaddle(30);
 		if(keycode == Keys.LEFT) game.movePaddle(-30);
 		return false;

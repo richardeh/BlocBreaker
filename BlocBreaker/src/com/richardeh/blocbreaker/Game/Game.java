@@ -23,10 +23,8 @@ public class Game extends com.badlogic.gdx.Game{
 
     public Game(){
         Ball ball = new Ball(0,32,32,32,5,5,0,0);
-        Ball ball2 = new Ball(0,32,32,32,10,10,0,0);
         balls = new ArrayList<Ball>();
         balls.add(ball);
-        balls.add(ball2);
         
         paddle = new Paddle(0,0,104,24,0,0);
         objects = new ArrayList<DynamicGameObject>();
@@ -59,17 +57,23 @@ public class Game extends com.badlogic.gdx.Game{
     		b.bounds.y = b.position.y;
     		
     }
-
-    public ArrayList<Vector2> getBallPosition(){
+    
+    public ArrayList<Vector2> getElementPositions(String list){
+    	
     	ArrayList<Vector2> positions = new ArrayList<Vector2>();
-    	for(Ball b:balls){
-    		positions.add(b.position);
+    	if(list.equalsIgnoreCase("blocks")){
+    		for(Block b:blocks){
+        		positions.add(b.position);
+        	}
+    	} else if(list.equalsIgnoreCase("balls")){
+    		for(Ball b:balls){
+        		positions.add(b.position);
+        	}
+    	} else if(list.equalsIgnoreCase("paddle")){
+    		positions.add(paddle.position);
     	}
-        return positions;
-    }
-
-    public Vector2 getPaddlePosition(){
-        return paddle.position;
+    	
+    	return positions;
     }
     
     public void movePaddle(int x){
@@ -116,16 +120,24 @@ public class Game extends com.badlogic.gdx.Game{
     }
     
     private void bounceTest(){
+    	// TODO: tinker so that this works right, instead of trapping the balls under the paddle
 
-		Rectangle overlap = new Rectangle();
+    	Rectangle intersection = new Rectangle();
+    	
     	for(Ball ball: balls){
     		for(DynamicGameObject o:objects){
-    			Intersector.intersectRectangles(ball.bounds, o.bounds, overlap);
-    			if(overlap!=null && overlap.area()>0){
-    				ball.velocity.y = -ball.velocity.y;
-    				ball.position.y = o.position.y+o.bounds.height;
-    			} else{
+    			
+    			if(Intersector.intersectRectangles(ball.bounds, o.bounds, intersection)){
+    				if(o.getClass() == Paddle.class){
+    					ball.velocity.y = -ball.velocity.y;
+    					ball.position.y = o.position.y+o.bounds.height+1;
+    				} else if(o.getClass() == Block.class){
+        				
+        			}
     			}
+    			
+    			
+
     		}
     	}
     }
