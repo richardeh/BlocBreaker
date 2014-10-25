@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.richardeh.blocbreaker.BlocBreaker;
 import com.richardeh.blocbreaker.Game.Assets;
+import com.richardeh.blocbreaker.Game.Block;
 import com.richardeh.blocbreaker.Game.Game;
 import com.richardeh.blocbreaker.framework.GenericScreen;
 
@@ -39,7 +40,6 @@ public class GameScreen extends GenericScreen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		ArrayList<Vector2> balls = game.getElementPositions("balls");
-		ArrayList<Vector2> blocks = game.getElementPositions("blocks");
 		ArrayList<Vector2> paddle = game.getElementPositions("paddle");
 		
 		game.update();
@@ -51,8 +51,30 @@ public class GameScreen extends GenericScreen {
 	        ballSprite.draw(batch);	
 		}
 		
-		for(Vector2 v:blocks){
-			
+		for(Block b:game.getBlocks()){
+			Sprite blockSprite = new Sprite();
+			switch(b.getColor()){
+			case RED:
+				blockSprite = Assets.redBlock;
+				break;
+			case BLUE:
+				blockSprite = Assets.blueBlock;
+				break;
+			case GREEN:
+				blockSprite = Assets.greenBlock;
+				break;
+			case GREY:
+				blockSprite = Assets.greyBlock;
+				break;
+			case PURPLE:
+				blockSprite = Assets.purpleBlock;
+				break;
+			case YELLOW:
+				blockSprite = Assets.yellowBlock;
+				break;
+			};
+			blockSprite.setPosition(b.position.x, b.position.y);
+			blockSprite.draw(batch);
 		}
 		
 		for(Vector2 v:paddle){

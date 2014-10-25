@@ -26,12 +26,17 @@ public class Game extends com.badlogic.gdx.Game{
         balls = new ArrayList<Ball>();
         balls.add(ball);
         
-        paddle = new Paddle(0,0,104,24,0,0);
         objects = new ArrayList<DynamicGameObject>();
+        Block block = new Block(0,256,Block.Color.RED, 1, false);
+        
+        paddle = new Paddle(0,0,104,24,0,0);
+        
         objects.add(paddle);
+        objects.add(block);
         
         currentLevel = 1;
         blocks= new ArrayList<Block>();
+        blocks.add(block);
         		//loadLevel(currentLevel);
     }
 
@@ -50,16 +55,17 @@ public class Game extends com.badlogic.gdx.Game{
         return new ArrayList<Block>();
     }
     
+    public ArrayList<Block> getBlocks(){
+    	return blocks;
+    }
     public void moveBall(Ball b,Vector2 v){
-
     		b.position.add(v);
     		b.bounds.x = b.position.x;
     		b.bounds.y = b.position.y;
-    		
     }
     
     public ArrayList<Vector2> getElementPositions(String list){
-    	
+    	// Returns a list of the positions of all the specified elements
     	ArrayList<Vector2> positions = new ArrayList<Vector2>();
     	if(list.equalsIgnoreCase("blocks")){
     		for(Block b:blocks){
@@ -77,6 +83,7 @@ public class Game extends com.badlogic.gdx.Game{
     }
     
     public void movePaddle(int x){
+    	// moves the paddle as specified
     	if(paddle.position.x+paddle.bounds.width+x>=w||paddle.position.x+x<=0) return;
     	
     	paddle.position.x+=x;
@@ -120,6 +127,7 @@ public class Game extends com.badlogic.gdx.Game{
     }
     
     private void bounceTest(){
+    	// Check the ball(s) for intersection with any object
     	// TODO: tinker so that this works right, instead of trapping the balls under the paddle
 
     	Rectangle intersection = new Rectangle();
@@ -129,15 +137,15 @@ public class Game extends com.badlogic.gdx.Game{
     			
     			if(Intersector.intersectRectangles(ball.bounds, o.bounds, intersection)){
     				if(o.getClass() == Paddle.class){
+    					// bounce the ball off the paddle
     					ball.velocity.y = -ball.velocity.y;
     					ball.position.y = o.position.y+o.bounds.height+1;
     				} else if(o.getClass() == Block.class){
-        				
+        				// destroy the block and remove it from the list
+    					ball.velocity.y = -ball.velocity.y;
+    					ball.position.y = o.position.y - ball.bounds.height;
         			}
     			}
-    			
-    			
-
     		}
     	}
     }
